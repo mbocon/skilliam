@@ -197,6 +197,7 @@
 		height: 50vh;
 		padding-bottom: 6em;
 		overflow: scroll;
+		margin-top: 1em;
 	}
 
 	.search {
