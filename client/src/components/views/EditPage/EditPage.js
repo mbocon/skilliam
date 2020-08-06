@@ -65,7 +65,9 @@ function EditPage(props) {
 					<Button variant='primary' type='submit' className='create-post-btn'>
 						Submit
 					</Button>
+					
 				</Form>
+				<button className='btn btn-danger cancel-btn' onClick={props.toggleEdit}>Cancel</button>
 			</div>
 		);
 	} else {

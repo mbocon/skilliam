@@ -11,6 +11,13 @@
 	box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
 }
 
+.cancel-btn {
+	width: fit-content;
+	margin: 0 auto;
+	margin-top: 1em;
+	font-size: .75em!important;
+}
+
 @media(max-width: 768px) {
 	.edit {
 		height: 100%;
