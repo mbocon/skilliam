@@ -5,7 +5,8 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     UPDATE_USER,
-    UPDATE_PROFILE
+    UPDATE_PROFILE,
+    DELETE_ACCOUNT
 } from './types';
 
 import { USER_SERVER } from '../components/Config.js';
@@ -71,3 +72,23 @@ export function logoutUser(){
     }
 }
 
+export function deleteAccount(dataToSubmit){
+    const request = axios.delete(`${USER_SERVER}/deleteuser/${dataToSubmit.id}`, dataToSubmit)
+                .then(response => response.data);
+                
+    return {
+        type: DELETE_ACCOUNT,
+        payload: request
+    }
+}
+
+
+
+// router.delete("/deleteuser/:id", (req, res) => {
+//     User.findByIdAndRemove({ _id: req.params.id }, (err, doc) => {
+//         if (err) return res.json({ success: false, err });
+//         return res.status(200).send({
+//             success: true
+//         });
+//     });
+// });
