@@ -5,6 +5,7 @@ export const AUTH_USER = 'auth_user';
 export const LOGOUT_USER = 'logout_user';
 export const UPDATE_USER = 'update_user';
 export const UPDATE_PROFILE = 'update_profile';
+export const DELETE_ACCOUNT = 'delete_account';
 // POST TYPES
 export const GET_POSTS = 'get_posts';
 export const CREATE_POST = 'create_post';

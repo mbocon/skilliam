@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { updateProfile, getUser } from '../../../_actions/user_actions';
+import { updateProfile, deleteAccount } from '../../../_actions/user_actions';
 import './profile.css';
-import { useEffect } from 'react';
 import AvatarUpdater from '../Avatar/AvatarUpdater';
 import { useSelector } from 'react-redux';
 
@@ -12,8 +11,6 @@ function Profile(props) {
 	const dispatch = useDispatch();
 
 	let id = localStorage.userId;
-
-	// const [user, setUser] = useState({});
 
 	const user = useSelector(state => state.user);
 	console.log(user, 'is user on EDIT PROFILEt');
@@ -71,12 +68,29 @@ function Profile(props) {
 		if (e.target.id === 'edit-avatar') {
 			setView(e.target.id);
 		}
+		if (e.target.id === 'delete-account'){
+			setView(e.target.id)
+		}
 		if (show === false) {
 			setShow(true);
 		} else {
 			setShow(false);
 		}
 	};
+
+	const handleAccountDelete = e => {
+		e.preventDefault()
+		let dataToSubmit = {
+			id: user.userData._id
+		}
+		dispatch(deleteAccount(dataToSubmit)).then(response => {
+			if (response.payload) {
+				props.history.push('/');
+			} else {
+				console.log(response.payload);
+			}
+		});
+	}
 
 	return (
 		<div className='app'>
@@ -89,6 +103,9 @@ function Profile(props) {
 					</button>
 					<button id='edit-avatar' className='btn btn-primary' onClick={toggleShow}>
 						Change Profile Avatar
+					</button>
+					<button id='delete-account' className='btn btn-danger' onClick={toggleShow}>
+						Delete My Account
 					</button>
 				</div>
 			) : (
@@ -130,9 +147,20 @@ function Profile(props) {
 						</div>
 					) : (
 						<div>
-							<AvatarUpdater id={id} toggleShow={toggleShow} />
+						{view ==='delete-account' ? null : <AvatarUpdater id={id} toggleShow={toggleShow} />}
 						</div>
 					)}
+					{view === 'delete-account' ? 
+					<div className='delete-account'>
+						<h2>Delete Account</h2>
+						<h5>Are you sure?</h5>
+						<Button variant='warning' onClick={handleAccountDelete}  className='register-btn' type='submit required'>
+								Delete My Account
+						</Button>
+						<Button variant='primary' onClick={toggleShow} className='register-btn cancel-btn' type='submit required'>
+								Cancel
+						</Button>
+					</div>: null }
 				</div>
 			)}
 		</div>
