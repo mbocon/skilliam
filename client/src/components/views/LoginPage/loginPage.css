@@ -6,3 +6,8 @@
 .login-btn {
     margin-top: 1em;
 }
+
+.login-error {
+    color: red;
+    text-transform: uppercase;
+}

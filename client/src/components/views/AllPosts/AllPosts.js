@@ -8,7 +8,7 @@ import moment from 'moment';
 
 function AllPosts(props) {
 	const dispatch = useDispatch();
-	console.log(localStorage)
+	console.log(localStorage);
 	let [posts, setPosts] = useState([]);
 	let [editing, setEditing] = useState(false);
 	let [searchTerm, setSearchTerm] = useState('');
@@ -25,8 +25,8 @@ function AllPosts(props) {
 					console.log('error getting posts');
 				}
 			});
-		} 
-		if (localStorage.deletedPost === 'true'){
+		}
+		if (localStorage.deletedPost === 'true') {
 			dispatch(getPosts()).then(response => {
 				if (response.payload) {
 					setPosts(response.payload);
@@ -63,7 +63,7 @@ function AllPosts(props) {
 				dispatch(getPosts()).then(response => {
 					if (response.payload) {
 						setPosts(response.payload);
-						localStorage.setItem('deletedPost', true)
+						localStorage.setItem('deletedPost', true);
 					} else {
 						console.log('error getting posts');
 					}
@@ -98,7 +98,7 @@ function AllPosts(props) {
 					.slice(0)
 					.reverse()
 					.map(post => {
-						// console.log(post)
+						console.log(post);
 						date = new Date(post.date);
 						return (
 							<Fragment key={post._id}>
@@ -137,14 +137,27 @@ function AllPosts(props) {
 																</a>
 															</li>
 															<li>
-																<a href={`${post.github}`} className='social-icon' target="_blank" rel="noopener noreferrer">
-																	<i className='fa fa-github-square' aria-hidden='true'></i>
-																</a>
+																{post.github === '' ? (
+																	<a disabled={true} className='social-icon' target='_blank' rel='noopener noreferrer'>
+																		<i className='fa fa-github-square no-href' aria-hidden='true'></i>
+																	</a>
+																) : (
+																	<a href={`${post.github}`} className='social-icon' target='_blank' rel='noopener noreferrer'>
+																		<i className='fa fa-github-square' aria-hidden='true'></i>
+																	</a>
+																)}
 															</li>
 															<li>
-																<a href={`${post.linkedin}`} className='social-icon' target="_blank" rel="noopener noreferrer">
+															{post.linkedin === '' ? (
+																<a disabled={true} className='social-icon' target='_blank' rel='noopener noreferrer'>
+																	<i className='fa fa-linkedin-square no-href' aria-hidden='true'></i>
+																</a>
+															) : (
+																<a href={`${post.linkedin}`} className='social-icon' target='_blank' rel='noopener noreferrer'>
 																	<i className='fa fa-linkedin-square' aria-hidden='true'></i>
 																</a>
+															)}
+																
 															</li>
 														</ul>
 													)}

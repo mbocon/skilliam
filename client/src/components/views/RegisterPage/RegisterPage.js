@@ -16,6 +16,8 @@ function RegisterPage(props) {
 	const [linkedin, setLinkedIn] = useState('');
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
+	const [passwordError, setError] = useState('');
+	const [emailError, setEmailError] = useState('');
 
 	const [validated, setValidated] = useState(false);
 	const handleSubmit = e => {
@@ -38,12 +40,14 @@ function RegisterPage(props) {
 		};
 
 		dispatch(registerUser(dataToSubmit)).then(response => {
-			console.log(response.payload, 'is register payload')
+			console.log(response.payload, 'is register payload');
 			if (response.payload.success) {
-				localStorage.setItem('theUserId', response.payload.user._id)
+				localStorage.setItem('theUserId', response.payload.user._id);
 				props.history.push('/setAvatar');
 			} else {
 				console.log(response.payload.err.errmsg);
+				// form.reset()
+				setEmailError('Email already taken')
 			}
 		});
 	};
@@ -72,8 +76,8 @@ function RegisterPage(props) {
 						<Form.Label>Email</Form.Label>
 						<Form.Control type='email' placeholder='Enter email' required />
 						<Form.Control.Feedback type='invalid'>Email is required</Form.Control.Feedback>
+						<span className='email-error'>{emailError}</span>
 					</Form.Group>
-
 
 					<Form.Group controlId='github' onChange={handleChange}>
 						<Form.Label>Github</Form.Label>
@@ -95,12 +99,19 @@ function RegisterPage(props) {
 						<Form.Label>Password confirmation</Form.Label>
 						<Form.Control type='password' placeholder='Confirm password' required />
 						<Form.Control.Feedback type='invalid'>Please confirm password.</Form.Control.Feedback>
+						{password === password2 ? null : <span className='password-match'>Passwords do not match</span>}
 					</Form.Group>
 				</Form.Row>
 
-				<Button variant='primary' className='register-btn' type='submit required'>
-					Register
-				</Button>
+				{password === password2 ? (
+					<Button variant='primary' className='register-btn' type='submit required'>
+						Register
+					</Button>
+				) : (
+					<Button variant='danger' className='register-btn ' disabled={true}>
+						Register
+					</Button>
+				)}
 			</Form>
 			<Footer />
 		</div>

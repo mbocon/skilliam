@@ -16,6 +16,8 @@
 	margin: 0 auto;
 	margin-top: 1em;
 	font-size: .75em!important;
+	background-color: red!important;
+	border: red!important;
 }
 
 @media(max-width: 768px) {
