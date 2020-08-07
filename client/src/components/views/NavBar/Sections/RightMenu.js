@@ -34,7 +34,10 @@ function RightMenu(props) {
 	} else {
 		return (
 			<Menu mode={props.mode}>
-			<Menu.Item key='app'>
+				<Menu.Item key='mail'>
+					<a href='/home'>Home</a>
+				</Menu.Item>
+				<Menu.Item key='app'>
 					<a href='/profile'>Profile</a>
 				</Menu.Item>
 				<Menu.Item key='logout'>
