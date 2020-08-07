@@ -192,6 +192,10 @@
 	font-size: .85em;
 }
 
+.no-href {
+	color: rgb(213, 213, 213)!important;
+}
+
 @media (max-width: 900px) {
 	.all-posts {
 		height: 50vh;

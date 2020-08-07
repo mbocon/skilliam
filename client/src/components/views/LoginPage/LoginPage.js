@@ -14,6 +14,7 @@ function LoginPage(props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [validated, setValidated] = useState(false);
+	const [loginError, setError] = useState('');
 
 	const handleSubmit = e => {
 
@@ -44,6 +45,12 @@ function LoginPage(props) {
 				props.history.push('/home')
 			} else {
 				console.log(response.payload);
+				setValidated(false);
+				form.reset()
+				setError('Wrong email and/or password')
+				setTimeout(()=>{
+					setError('')
+				}, 2000)
 			}
 		});
 	};
@@ -57,6 +64,7 @@ function LoginPage(props) {
 		<Fragment>
 			<div className='login-page app'>
 				<h2>Login</h2>
+				{loginError === '' ? null : <h6 className='login-error'>{loginError}</h6> }
 				<Form className='register-form' noValidate validated={validated} onSubmit={handleSubmit}>
 					<Form.Row>
 						<Form.Group controlId='email' onChange={handleChange}>

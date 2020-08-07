@@ -30,7 +30,10 @@ text-align: left;
   height: 50px;
 }
 
-  
+.password-match,
+.email-error {
+  color: red;
+}
 
 
 
